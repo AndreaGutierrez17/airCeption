@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 :root{
   --maroon:#4d1f32;
   --ink:#0f0f12;
@@ -99,8 +98,6 @@ footer{border-top:1px solid rgba(255,255,255,.1)}
   .avatar{ width: 160px; height: 160px; }
 }
 
-
-=======
 :root{
   --maroon:#4d1f32;
   --ink:#0f0f12;
@@ -186,4 +183,3 @@ footer{border-top:1px solid rgba(255,255,255,.1)}
   .navbar-toggler{ display:inline-flex !important; }
 }
 
->>>>>>> a40c15e33270a6a8ac15885a370f081f6afd7e1c
