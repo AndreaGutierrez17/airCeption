@@ -71,12 +71,6 @@ footer{border-top:1px solid rgba(255,255,255,.1)}
   color: var(--ink);
 }
 
-.card img {
-  width: 100%;
-  height: auto;
-  border-radius: 0.5rem; /* opcional: esquinas suaves */
-  object-fit: cover;     /* rellena sin deformar */
-}
 
 /* Desktop (≥992px): menú siempre visible, sin hamburguesa */
 #navbarAirception{ display:flex !important; }
