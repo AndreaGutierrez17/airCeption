@@ -183,3 +183,33 @@ footer{border-top:1px solid rgba(255,255,255,.1)}
   .navbar-toggler{ display:inline-flex !important; }
 }
 
+/* --- FIX MENÚ MÓVIL: visible, encima y con fondo --- */
+.navbar{ z-index: 1100 !important; } /* por encima del hero/overlay */
+
+@media (max-width: 991.98px){
+  /* Cuando el collapse está abierto, que se vea como panel */
+  #navbarAirception.collapse.show{
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    background: #4d1f32;               /* fondo sólido (maroon) */
+    padding: .75rem 1rem 1rem;
+    box-shadow: 0 12px 28px rgba(0,0,0,.35);
+  }
+
+  /* Links legibles en móvil */
+  #navbarAirception .nav-link{
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1.05rem;
+    padding: .6rem 0.25rem;
+    border-radius: .4rem;
+  }
+  #navbarAirception .nav-link:hover,
+  #navbarAirception .nav-link:focus{
+    background: rgba(255,255,255,.08);
+  }
+
+  /* Icono hamburguesa más visible */
+  .navbar .navbar-toggler{ border-color: rgba(255,255,255,.6); }
+  .navbar .navbar-toggler-icon{ filter: brightness(1.15); }
+}

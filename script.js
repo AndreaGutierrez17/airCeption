@@ -72,3 +72,17 @@ ${msg}`
     window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
   });
 })();
+
+// Cerrar navbar en móvil al tocar un link o botón dentro del menú
+(() => {
+  const nav = document.getElementById('navbarAirception'); // id del collapse
+  if (!nav) return;
+  nav.addEventListener('click', (e) => {
+    const el = e.target.closest('.nav-link, .btn');
+    if (!el) return;
+    if (window.innerWidth < 992) {
+      const inst = bootstrap.Collapse.getInstance(nav) || new bootstrap.Collapse(nav, { toggle: false });
+      inst.hide();
+    }
+  });
+})();
