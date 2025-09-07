@@ -78,3 +78,14 @@ footer{border-top:1px solid rgba(255,255,255,.1)}
   object-fit: cover;     /* rellena sin deformar */
 }
 
+/* Desktop (≥992px): menú siempre visible, sin hamburguesa */
+#navbarAirception{ display:flex !important; }
+.navbar-toggler{ display:none !important; }
+
+/* Móviles/Tablets (<992px): menú colapsable (hamburguesa) */
+@media (max-width: 991.98px){
+  #navbarAirception{ display:none !important; }      /* oculto por defecto */
+  #navbarAirception.show{ display:block !important; }/* Bootstrap añade .show al abrir */
+  .navbar-toggler{ display:inline-flex !important; }
+}
+
