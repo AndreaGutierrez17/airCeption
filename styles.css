@@ -213,3 +213,23 @@ footer{border-top:1px solid rgba(255,255,255,.1)}
   .navbar .navbar-toggler{ border-color: rgba(255,255,255,.6); }
   .navbar .navbar-toggler-icon{ filter: brightness(1.15); }
 }
+
+/* --- Prioridades de capas (z-index) --- */
+/* Navbar por encima del contenido normal */
+.navbar{ z-index: 1100 !important; }
+
+/* Menú colapsado abierto en móvil */
+@media (max-width: 991.98px){
+  #navbarAirception.collapse.show{
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    z-index: 1200;                  /* panel del menú */
+    background: #4d1f32;
+    padding: .75rem 1rem 1rem;
+    box-shadow: 0 12px 28px rgba(0,0,0,.35);
+  }
+}
+
+/* Modales SIEMPRE por encima de navbar y menú */
+.modal-backdrop{ z-index: 2000 !important; }
+.modal{ z-index: 2005 !important; }
