@@ -310,30 +310,111 @@ footer{border-top:1px solid rgba(255,255,255,.1)}
   #value-care .vbc-ribbon{position:static;border-radius:0;margin-top:.25rem}
 }
 
-/* Book a Demo */
-#book-demo{ background:#faf9fb; }
-#book-demo .object-cover{ width:100%; height:100%; object-fit:cover; }
-
-/* Botón marca */
-.btn-maroon{ background:#4d1f32; color:#fff; border:0; }
-.btn-maroon:hover{ background:#3b1626; color:#fff; }
-
-/* Badges con colores de bandera (solo CSS) */
-.flag-badge{
-  display:inline-block; padding:.5rem .8rem; border-radius:999px;
-  font-weight:700; font-size:.92rem; line-height:1; white-space:nowrap;
-  border:1px solid rgba(0,0,0,.06); box-shadow:0 1px 2px rgba(0,0,0,.05);
-  color:#111;
+/* ===== Flags (solo esta sección) ===== */
+.flags-row{
+  display:flex;
+  gap:.75rem;
+  flex-wrap:wrap;
+  align-items:flex-start;
 }
-.flag-ie{  background:linear-gradient(90deg,#169B62 0 33.33%,#fff 33.33% 66.66%,#FF883E 66.66% 100%); }
-.flag-uk{  background:linear-gradient(90deg,#012169 0 40%,#fff 40% 50%,#C8102E 50% 60%,#012169 60% 100%); color:#fff; }
-.flag-us{  background:linear-gradient(90deg,#B22234 0 40%,#fff 40% 50%,#3C3B6E 50% 100%); color:#fff; }
 
-/* Form look & feel */
-#demoForm .form-label{ font-weight:600; color:#2b2230; }
-#demoForm .form-control, #demoForm .form-select{
-  border-radius:.8rem; border:1px solid #e7dfe3;
+.flag-item{
+  display:flex;
+  flex-direction:column;    
+  align-items:center;
+  gap:.35rem;
+  padding:.35rem .6rem;
+  border-radius:999px;      
+  background:#fff;
+  border:1px solid #ececef;
+  box-shadow:0 1px 2px rgba(0,0,0,.05);
 }
-#demoForm .form-control:focus, #demoForm .form-select:focus{
-  border-color:#4d1f32; box-shadow:0 0 0 .2rem rgba(77,31,50,.15);
+
+.flag-img{
+  width:32px;               
+  height:24px;
+  object-fit:cover;          
+  border-radius:2px;
+  box-shadow:0 0 0 1px rgba(0,0,0,.12) inset;
+}
+
+.flag-label{
+  font-size:.95rem;
+  font-weight:700;
+  color:#111;                
+  line-height:1.1;
+  text-align:center;
+  white-space:nowrap;       
+}
+
+
+@media (min-width: 768px){
+  .flag-img{ width:36px; height:26px; }
+  .flag-label{ font-size:.98rem; }
+}
+
+/* Más aire debajo de las banderas */
+.flags-row{
+  margin-bottom: 1.25rem;   /* ~20px en móvil */
+}
+
+@media (min-width: 768px){
+  .flags-row{
+    margin-bottom: 1.75rem; /* un poco más en desktop */
+  }
+}
+
+
+/* === Ajuste de aire en chips de banderas (override) === */
+.flags-row .flag-item{
+  /* más espacio interno, especialmente a los lados */
+  padding: .60rem 1.25rem !important;   /* antes: .35rem .6rem */
+  gap: .50rem !important;               /* separa banderita y texto */
+  border-radius: 999px !important;
+}
+
+/* un pelín de colchón visual al texto (opcional) */
+.flags-row .flag-label{
+  padding: 0 .10rem !important;
+}
+
+/* un poco más de espacio debajo del grupo */
+.flags-row{
+  margin-bottom: 1.75rem !important;
+}
+
+@media (min-width: 768px){
+  .flags-row{
+    margin-bottom: 2rem !important;
+  }
+}
+
+/* === Alineación y consistencia de las banderas (grid responsive) === */
+.flags-row{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(230px, 1fr)); 
+  gap: 1rem 1.25rem;                                 
+  align-items: center;                                 
+  justify-items: start;                              
+  margin-bottom: 1.75rem !important;
+}
+
+
+.flags-row .flag-item{
+  width: 100%;
+  justify-content: center;   
+}
+
+/* 2 columnas en tablet */
+@media (max-width: 992px){
+  .flags-row{
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+  }
+}
+
+/* 1 columna en móvil */
+@media (max-width: 576px){
+  .flags-row{
+    grid-template-columns: 1fr;
+  }
 }
