@@ -17,103 +17,51 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   });
 });
 
-// Form validation + functional submit (mailto + WhatsApp fallback)
-(() => {
-  const form = document.getElementById('demoForm');
-  const whBtn = document.getElementById('whBtn');
-
-  // Set WhatsApp link dynamically from fields
-  const buildWhatsApp = () => {
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const org = document.getElementById('org').value.trim();
-    const msg = document.getElementById('msg').value.trim();
-
-    // Cambia al número oficial si lo tienes (formato internacional sin +)
-    const targetNumber = "15551234567"; // <--- REEMPLAZA AQUÍ EL NÚMERO OFICIAL
-    const text = `Hello airCeption,%0A%0AI'm ${name} from ${org}.%0AEmail: ${email}%0APhone: ${phone}%0A%0AMessage:%0A${msg}`;
-    return `https://wa.me/${targetNumber}?text=${text}`;
-  };
-
-  whBtn.addEventListener('click', (e)=>{
-    whBtn.setAttribute('href', buildWhatsApp());
-  });
-
-  form.addEventListener('submit', (event) => {
-    if (!form.checkValidity()) {
-      event.preventDefault();
-      event.stopPropagation();
-      form.classList.add('was-validated');
-      return;
-    }
-    event.preventDefault();
-
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const org = document.getElementById('org').value.trim();
-    const msg = document.getElementById('msg').value.trim();
-
-    // Cambia al correo oficial
-    const to = "hello@airception.com"; // <--- REEMPLAZA AQUÍ EL CORREO OFICIAL
-    const subject = encodeURIComponent("Demo Request — airCeption Website");
-    const body = encodeURIComponent(
-`Name: ${name}
-Email: ${email}
-Phone: ${phone}
-Organization: ${org}
-
-Message:
-${msg}`
-    );
-
-    // Mailto functional open
-    window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
-  });
-})();
-
-// Cerrar navbar en móvil al tocar un link o botón dentro del menú
-(() => {
-  const nav = document.getElementById('navbarAirception'); // id del collapse
-  if (!nav) return;
-  nav.addEventListener('click', (e) => {
-    const el = e.target.closest('.nav-link, .btn');
-    if (!el) return;
-    if (window.innerWidth < 992) {
-      const inst = bootstrap.Collapse.getInstance(nav) || new bootstrap.Collapse(nav, { toggle: false });
-      inst.hide();
+// Smooth scroll (con offset por navbar fija)
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click', e=>{
+    const id = a.getAttribute('href');
+    if(id.length>1){
+      const el = document.querySelector(id);
+      if(el){
+        e.preventDefault();
+        const top = el.getBoundingClientRect().top + window.scrollY - 72;
+        window.scrollTo({top, behavior:'smooth'});
+        history.replaceState(null,'',id);
+      }
     }
   });
-})();
+});
 
-<script>
+// Form: mailto a 2 destinatarios + honeypot
 (() => {
   const f = document.getElementById('demoForm');
   if(!f) return;
+
   f.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    // antispam honeypot
+    // honeypot
     if (f.website && f.website.value.trim() !== '') return;
 
-    const name = f.name.value.trim();
-    const email = f.email.value.trim();
-    const org = f.org.value.trim();
-    const role = f.role.value.trim();
+    const name    = f.name.value.trim();
+    const email   = f.email.value.trim();
+    const org     = f.org.value.trim();
+    const role    = f.role.value.trim();
     const country = f.country.value;
-    const phone = f.phone.value.trim();
-    const time = f.time.value;
-    const msg = f.message.value.trim();
+    const phone   = f.phone.value.trim();
+    const time    = f.time.value;
+    const msg     = f.message.value.trim();
+    const consent = document.getElementById('consent').checked;
 
-    if (!name || !email || !org || !country || !document.getElementById('consent').checked) {
+    if (!name || !email || !org || !country || !consent) {
       alert('Please complete the required fields.');
       return;
     }
 
-    // Construye el cuerpo del correo
-    const to = 'hello@airception.com'; // <-- cámbialo si tienes otro correo
-    const subject = encodeURIComponent('airCeption — Demo Request');
+    // Destinatarios aprobados por el cliente (Opción A)
+    const to = 'john.kelly@airception.com,iain.warner@airception.com';
+    const subject = encodeURIComponent('New Book a Demo Lead for airCeption');
     const body = encodeURIComponent(
 `Name: ${name}
 Email: ${email}
@@ -129,10 +77,9 @@ ${msg || '-'}
 (Submitted from website Book a Demo)`
     );
 
-    const mailtoURL = `mailto:${to}?subject=${subject}&body=${body}`;
-    // Mensaje y redirección
     document.getElementById('demoFormMsg').classList.remove('d-none');
-    window.location.href = mailtoURL;
+    window.location.href = mailto:${to}?subject=${subject}&body=${body};
   });
 })();
-</script>
+
+ 

@@ -418,3 +418,71 @@ footer{border-top:1px solid rgba(255,255,255,.1)}
     grid-template-columns: 1fr;
   }
 }
+
+/* ===== Tighten global whitespace ===== */
+section { padding-top: 2.4rem; padding-bottom: 2.4rem; }
+@media (max-width: 992px){
+  section { padding-top: 1.8rem; padding-bottom: 1.8rem; }
+}
+ings y leads más compactos */
+h2.serif { 
+  margin-bottom: .8rem;
+ }
+.section-lead, .text-muted.lead { margin-bottom: .9rem; }
+.row.g-5, .row.g-4 { --bs-gutter-x: 1.15rem; --bs-gutter-y: 1.15rem; }
+
+.card.rounded-4 { border-radius: 1rem; }
+.shadow-sm { box-shadow: 0 6px 20px rgba(0,0,0,.06)!important; }
+
+.badge-chip, .hero-stats li {
+  padding: .32rem .62rem;
+  border-radius: 999px;
+}
+html, body { overflow-x: hidden; }
+
+/* Carrusel: imágenes del mismo marco y sin deformar */
+.object-fit-contain { object-fit: contain; }
+
+/* Franjas maroon (doble franja; solo la inferior lleva texto) */
+.maroon-strip{
+  position:absolute; left:0; right:0;
+  background:#4d1f32; color:#fff;
+  display:flex; justify-content:center; align-items:center;
+  min-height:34px; padding:6px 12px;
+  font-size:.875rem; line-height:1.1;
+  pointer-events:none; /* no bloquea gestos */
+}
+.maroon-strip.top{ top:0; }
+.maroon-strip.bottom{ bottom:0; }
+
+/* Título centrado con subrayado sutil (ancho auto bajo el texto) */
+.heading-underline{
+  display:inline-block;
+  width:100%;
+  text-align:center;
+  position:relative;
+  padding-bottom:.25rem;
+}
+.heading-underline::after{
+  content:"";
+  display:block;
+  width:220px;           /* largo del subrayado */
+  max-width:60%;
+  height:2px;
+  margin:.25rem auto 0;
+  background:rgba(107,13,40,.35);
+  border-radius:1px;
+}
+
+/* Pastilla de icono con paleta de marca */
+.icon-pill{
+  display:inline-flex; justify-content:center; align-items:center;
+  width:56px; height:56px; border-radius:50%;
+  background:rgba(107,13,40,.08); color:#6B0D28;
+  font-size:28px;
+}
+
+/* Tarjetas con hover sutil */
+.kf-card{ transition:transform .18s ease, box-shadow .18s ease; }
+.kf-card:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(0,0,0,.08); }
+
