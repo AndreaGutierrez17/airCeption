@@ -82,4 +82,17 @@ ${msg || '-'}
   });
 })();
 
+    (() => {
+      const nav = document.getElementById('navMenu');
+      if (!nav) return;
+      nav.addEventListener('click', (e) => {
+        const el = e.target.closest('.nav-link, .btn');
+        if (!el) return;
+        if (window.innerWidth < 992) {
+          const inst = bootstrap.Collapse.getInstance(nav) || new bootstrap.Collapse(nav, { toggle: false });
+          inst.hide();
+        }
+      });
+    })();
+
  

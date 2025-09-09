@@ -486,3 +486,20 @@ html, body { overflow-x: hidden; }
 .kf-card{ transition:transform .18s ease, box-shadow .18s ease; }
 .kf-card:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(0,0,0,.08); }
 
+/* Menú y layout sólidos en móvil (sin scroll lateral) */
+html, body { overflow-x: hidden; }
+.bg-maroon { background:#4d1f32; }
+
+@media (max-width: 991.98px){
+  #navMenu {
+    background:#4d1f32;
+    padding:.75rem 1rem;
+    margin:0 -1rem;
+  }
+  #navMenu .nav-link { color:#fff; padding:.5rem 0; }
+  #navMenu .btn { width:100%; margin-top:.25rem; }
+}
+
+@media (min-width: 992px){
+  #navMenu .navbar-nav { gap:.5rem; }
+}
