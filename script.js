@@ -1,4 +1,3 @@
-
 // 1) Year (tolerante si no existe el span#year)
 (() => {
   const y = document.getElementById('year');
@@ -25,12 +24,34 @@
   });
 })();
 
-// 3) Form: mailto a 2 destinatarios + honeypot
+// 3) Form: mailto a 1 destinatario + honeypot + copia al portapapeles
 (() => {
   const f = document.getElementById('demoForm');
   if (!f) return;
 
-  f.addEventListener('submit', (e) => {
+  // util: copiar texto al portapapeles con fallback
+  const copyToClipboard = async (text) => {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(text);
+        return true;
+      }
+      // Fallback
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  };
+
+  f.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     // honeypot
@@ -41,6 +62,7 @@
     const org     = (f.org?.value || '').trim();
     const role    = (f.role?.value || '').trim();
     const country = f.country?.value || '';
+    atob
     const phone   = (f.phone?.value || '').trim();
     const time    = f.time?.value || '';
     const msg     = (f.message?.value || '').trim();
@@ -51,11 +73,11 @@
       return;
     }
 
-    // Destinatarios (opción A del cliente)
-    const to = ['john.kelly@airception.com', 'iain.warner@airception.com'].join(',');
+    // Destinatario actualizado por el cliente
+    const to = 'demo@airception.com';
 
     const subject = encodeURIComponent('New Book a Demo Lead for airCeption');
-    const body = encodeURIComponent(
+    const plainBody =
 `Name: ${name}
 Email: ${email}
 Organization: ${org}
@@ -67,8 +89,12 @@ Preferred time: ${time || 'Anytime'}
 Message:
 ${msg || '-'}
 
-(Submitted from website Book a Demo)`
-    );
+(Submitted from website Book a Demo)`;
+
+    const body = encodeURIComponent(plainBody);
+
+    // Copia al portapapeles (silencioso; no frena el flujo si falla)
+    await copyToClipboard(plainBody);
 
     // Mostrar aviso y abrir cliente de correo
     const msgNode = document.getElementById('demoFormMsg');
@@ -83,7 +109,6 @@ ${msg || '-'}
   const collapseEl = document.getElementById('navMenu');
   if (!collapseEl) return;
 
-  // Cierra al tocar cualquier .nav-link o .btn dentro del collapse
   collapseEl.addEventListener('click', (e) => {
     const el = e.target.closest('.nav-link, .btn');
     if (!el) return;
