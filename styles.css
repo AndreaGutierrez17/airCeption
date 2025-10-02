@@ -307,13 +307,15 @@ footer{border-top:1px solid rgba(255,255,255,.1)}
   #value-care .vbc-ribbon{position:static;border-radius:0;margin-top:.25rem}
 }
 
-/* ===== Flags (solo esta sección) ===== */
-.flags-row{
-  display:flex;
-  gap:.75rem;
-  flex-wrap:wrap;
-  align-items:flex-start;
+/* ===== Flag ===== */
+.flags-row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 1rem 1.25rem !important;
+  justify-content: flex-start;
+  margin-bottom: 2rem !important;
 }
+
 
 .flag-item{
   display:flex;
