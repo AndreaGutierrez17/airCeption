@@ -3,7 +3,7 @@
   "outputDirectory": "public",
   "headers": [
     {
-      "source": "/families.html",
+      "source": "/families",
       "headers": [
         {
           "key": "Content-Security-Policy",
@@ -41,5 +41,6 @@
       ]
     }
   ],
-  "buildCommand": "node -e \"const fs=require('node:fs');fs.mkdirSync('public',{recursive:true});for(const name of ['index.html','families.html','styles.css','script.js','img'])fs.cpSync(name,'public/'+name,{recursive:true});\""
+  "buildCommand": "node -e \"const fs=require('node:fs');fs.mkdirSync('public',{recursive:true});for(const name of ['index.html','families.html','styles.css','script.js','img'])fs.cpSync(name,'public/'+name,{recursive:true});\"",
+  "cleanUrls": true
 }
